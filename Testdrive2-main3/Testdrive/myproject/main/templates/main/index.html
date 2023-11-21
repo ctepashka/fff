@@ -1,0 +1,44 @@
+{% extends 'main/base.html' %}
+
+{% block title %}
+Главная страница
+{% endblock %}
+
+
+{% block content %}
+<div class="container p-3 border">
+    <form method="get" class="form-filter">
+        <div>
+            {{ tasks.form.as_p }}
+            <button type="submit" class="btn btn-primary">Фильтровать</button>
+        </div>
+    </form>
+</div>
+<div class="container p-3 border">
+    <h1>Активные записи</h1>
+    {% if tasks %}
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th>Клиент</th>
+            <th>Телефон</th>
+            <th>Email</th>
+            <th>Автомобиль</th>
+        </tr>
+        </thead>
+            <tbody>
+            {% for elem in tasks.qs %}
+                <tr>
+                    <td>{{ elem.name }}</td>
+                    <td>{{ elem.phone }}</td>
+                    <td>{{ elem.email }}</td>
+                    <td>{{ elem.auto }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+    </table>
+    {% else %}
+        <p>У нас нет записей</p>
+    {% endif %}
+</div>
+{% endblock %}
